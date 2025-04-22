@@ -23,7 +23,7 @@ public class GmailSmtpService(IConfiguration _config)
         // Console.WriteLine($"Subject: {subject}");
         // Console.WriteLine($"Body: {body}");
 
-        var smtpClient = new SmtpClient(host, port);
+        var smtpClient = new SmtpClient(host, Convert.ToInt16(port));
         smtpClient.EnableSsl = true;
         smtpClient.UseDefaultCredentials = false;
 
