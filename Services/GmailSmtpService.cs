@@ -4,7 +4,7 @@ using System.Net.Mail;
 
 namespace BlazorMailKitApp.Services;
 
-public class GmailSmtpService(IConfiguration _config) : IGmailService
+public class GmailSmtpService(IConfiguration _config)
 {
 
     public async Task SendEmailAsync(string receptor, string subject, string body)

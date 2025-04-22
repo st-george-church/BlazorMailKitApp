@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace BlazorMailKitApp.Services;
 
-public class GmailApiService : IGmailService
+public class GmailApiService
 {
     private const string ApplicationName = "BlazorMailKitApp";
     private readonly GmailService _gmailService;
