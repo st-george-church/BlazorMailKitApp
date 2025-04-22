@@ -1,0 +1,45 @@
+﻿@page "/send-smtp-email"
+@inject BlazorMailKitApp.Services.GmailSmtpService _emailService
+@rendermode InteractiveServer
+
+<h3>Send SMTP Email</h3>
+
+<div>
+    <label>To:</label>
+    <input @bind="ToEmail" />
+</div>
+<div>
+    <label>Subject:</label>
+    <input @bind="Subject" />
+</div>
+<div>
+    <label>Body:</label>
+    <textarea @bind="Body"></textarea>
+</div>
+<button @onclick="() => SendTheEmail()">Send</button>
+
+@if (Message != null)
+{
+    <p>@Message</p>
+}
+
+@code {
+    private string? ToEmail;
+    private string? Subject;
+    private string? Body;
+    private string? Message;
+
+    private async Task SendTheEmail()
+    {
+        Console.WriteLine("SendTheEmail method fired!"); // Debug log
+        try
+        {
+            await _emailService.SendEmailAsync(ToEmail!, Subject!, Body!);
+            Message = "Email sent successfully!";
+        }
+        catch (Exception ex)
+        {
+            Message = $"Error: {ex.Message}";
+        }
+    }
+}

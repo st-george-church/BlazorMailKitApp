@@ -1,0 +1,58 @@
+﻿@page "/send-api-email"
+@inject BlazorMailKitApp.Services.IGmailService _emailService
+@rendermode InteractiveServer
+
+<h3 class="text-center my-4">Send API Email</h3>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form>
+                <div class="mb-3">
+                    <label for="toEmail" class="form-label">To:</label>
+                    <input id="toEmail" type="email" class="form-control" @bind="ToEmail" placeholder="Enter recipient's email" />
+                </div>
+                <div class="mb-3">
+                    <label for="subject" class="form-label">Subject:</label>
+                    <input id="subject" type="text" class="form-control" @bind="Subject" placeholder="Enter email subject" />
+                </div>
+                <div class="mb-3">
+                    <label for="body" class="form-label">Body:</label>
+                    <textarea id="body" class="form-control" @bind="Body" rows="5" placeholder="Enter email body"></textarea>
+                </div>
+                @* <button type="button" class="btn btn-primary w-100" @onclick="SendTheEmail">Send</button> *@
+                <button class="btn btn-primary w-100" @onclick="() => SendTheEmail()">Send</button>
+            </form>
+        </div>
+
+    @if (Message != null)
+    {
+        <div class="alert mt-3 @GetAlertClass()" role="alert">
+            @Message
+        </div>
+    }
+</div>
+
+@code {
+    private string? ToEmail;
+    private string? Subject;
+    private string? Body;
+    private string? Message;
+
+    private async Task SendTheEmail()
+    {
+        try
+        {
+            await _emailService.SendEmailAsync(ToEmail!, Subject!, Body!);
+            Message = "Email sent successfully!";
+        }
+        catch (Exception ex)
+        {
+            Message = $"Error: {ex.Message}";
+        }
+    }
+
+    private string GetAlertClass()
+    {
+        return Message?.StartsWith("Error") == true ? "alert-danger" : "alert-success";
+    }
+}
