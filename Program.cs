@@ -4,6 +4,9 @@ using MailKit;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add configuration from environment variables
+builder.Configuration.AddEnvironmentVariables();
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
