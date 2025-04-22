@@ -12,12 +12,12 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 // builder.Services.AddSingleton<GmailApiService>();
-// builder.Services.AddTransient<GmailSmtpService>();
+builder.Services.AddTransient<GmailSmtpService>();
 
 // Register GmailApiService or GmailSmtpService
 // builder.Services.AddScoped<IGmailService, GmailApiService>();
 // Or switch to GmailSmtpService
-builder.Services.AddScoped<IGmailService, GmailSmtpService>();
+// builder.Services.AddScoped<IGmailService, GmailSmtpService>();
 
 
 var app = builder.Build();
