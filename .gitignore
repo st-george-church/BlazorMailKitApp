@@ -4,8 +4,9 @@
 ## Get latest from `dotnet new gitignore`
 
 TokenStore/
-appsettings.Development.json
+docs/readme.txt
 appsettings.json
+appsettings.Development.json
 
 # dotenv files
 .env
